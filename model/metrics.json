@@ -1,0 +1,52 @@
+{
+  "accuracy": [
+    0.8306851983070374,
+    0.8875370621681213,
+    0.8991110920906067,
+    0.9089999794960022
+  ],
+  "val_accuracy": [
+    0.14533333480358124,
+    0.2681666612625122,
+    0.8458333611488342,
+    0.906000018119812
+  ],
+  "loss": [
+    0.4826367199420929,
+    0.3122140169143677,
+    0.2763012647628784,
+    0.25328773260116577
+  ],
+  "val_loss": [
+    4.560451984405518,
+    4.181760311126709,
+    0.44186604022979736,
+    0.2519668936729431
+  ],
+  "test_accuracy": 0.9014999866485596,
+  "test_loss": 0.27329346537590027,
+  "classes": [
+    "T-shirt/top",
+    "Trouser",
+    "Pullover",
+    "Dress",
+    "Coat",
+    "Sandal",
+    "Shirt",
+    "Sneaker",
+    "Bag",
+    "Ankle boot"
+  ],
+  "classes_es": [
+    "Camiseta / Top",
+    "Pantal\u00f3n",
+    "Jersey / Su\u00e9ter",
+    "Vestido",
+    "Abrigo",
+    "Sandalia",
+    "Camisa",
+    "Zapatilla deportiva",
+    "Bolso / Cartera",
+    "Bot\u00edn"
+  ]
+}

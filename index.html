@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FashionVision AI | Sistema Integrador de Redes Neuronales</title>
+  
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+  <!-- Google Fonts Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <div class="brand">
+        <div class="brand-icon">
+          <!-- Vector Neural Brain Icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a4 4 0 0 1 4 4c0 .8-.2 1.5-.7 2.1l1.4 1.4A6 6 0 0 0 12 0a6 6 0 0 0-4.7 9.5l1.4-1.4A4 4 0 0 1 12 2z"/>
+            <path d="M12 22a4 4 0 0 1-4-4c0-.8.2-1.5.7-2.1L7.3 14.5A6 6 0 0 0 12 24a6 6 0 0 0 4.7-9.5l-1.4 1.4c.5.6.7 1.3.7 2.1a4 4 0 0 1-4 4z"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M5 12a7 7 0 0 1 1.5-4.3l-1.4-1.4A9 9 0 0 0 3 12a9 9 0 0 0 2.1 5.7l1.4-1.4A7 7 0 0 1 5 12z"/>
+            <path d="M19 12a7 7 0 0 1-1.5 4.3l1.4 1.4A9 9 0 0 0 21 12a9 9 0 0 0-2.1-5.7l-1.4 1.4A7 7 0 0 1 19 12z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">
+            FashionVision AI
+            <span class="brand-badge">CNN v2.1</span>
+          </div>
+          <div class="brand-subtitle">Proyecto Integrador &bull; Redes Neuronales</div>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#proyecto" class="nav-link">Proyecto</a></li>
+        <li><a href="#arquitectura" class="nav-link">Arquitectura</a></li>
+        <li><a href="#tutorial" class="nav-link">Tutorial</a></li>
+        <li><a href="#glosario" class="nav-link">Glosario</a></li>
+        <li><a href="#clases" class="nav-link">Dataset</a></li>
+        <li><a href="#comparador" class="nav-link">Comparador</a></li>
+        <li><a href="#despliegue" class="nav-link">Despliegue</a></li>
+        <li><a href="doc/INDEX.md" class="nav-link" target="_blank">Documentación</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="http://localhost:8501" target="_blank" class="btn btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          Lanzar Streamlit
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="proyecto" class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span class="hero-pill-indicator"></span>
+        Modelo Convolucional en Producción &bull; Fashion-MNIST
+      </div>
+
+      <h1 class="hero-title">
+        Clasificación y Análisis Comparativo con <span class="hero-title-gradient">Redes Neuronales</span>
+      </h1>
+
+      <p class="hero-description">
+        Solución integral de visión por computadora basada en una arquitectura convolucional profunda (CNN). Diseñada para procesar imágenes arbitrarias, predecir categorías textiles con alta precisión y contrastar vectores de características contra prototipos auténticos del dataset de Zalando.
+      </p>
+
+      <div class="hero-cta">
+        <a href="http://localhost:8501" target="_blank" class="btn btn-primary" style="padding: 0.85rem 1.75rem; font-size: 0.95rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          Abrir Laboratorio Web
+        </a>
+        <a href="#arquitectura" class="btn btn-secondary" style="padding: 0.85rem 1.75rem; font-size: 0.95rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="20" x2="18" y2="10"/>
+            <line x1="12" y1="20" x2="12" y2="4"/>
+            <line x1="6" y1="20" x2="6" y2="14"/>
+          </svg>
+          Ver Arquitectura
+        </a>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value accent-blue" id="stat-acc">90.15%</div>
+          <div class="stat-label">Test Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value accent-purple" id="stat-classes">10 Clases</div>
+          <div class="stat-label">Categorías de Moda</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value accent-emerald" id="stat-time">&lt; 18 ms</div>
+          <div class="stat-label">Latencia de Inferencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value accent-cyan" id="stat-samples">70,000</div>
+          <div class="stat-label">Muestras Evaluadas</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Pillars Section -->
+  <section class="section-pillars">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">Arquitectura del Sistema</span>
+        <h2 class="section-title">Pilares Técnicos del Proyecto</h2>
+        <p class="section-subtitle">
+          Diseñado para cumplir con los requerimientos académicos de experimentación rigurosa y las exigencias de despliegue en entornos reales.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Pillar 1 -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+              <rect x="9" y="9" width="6" height="6"/>
+              <line x1="9" y1="1" x2="9" y2="4"/>
+              <line x1="15" y1="1" x2="15" y2="4"/>
+              <line x1="9" y1="20" x2="9" y2="23"/>
+              <line x1="15" y1="20" x2="15" y2="23"/>
+              <line x1="20" y1="9" x2="23" y2="9"/>
+              <line x1="20" y1="14" x2="23" y2="14"/>
+              <line x1="1" y1="9" x2="4" y2="9"/>
+              <line x1="1" y1="14" x2="4" y2="14"/>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Red Convolucional (CNN)</h3>
+          <p class="pillar-text">
+            Extracción jerárquica de características morfológicas mediante filtros bidimensionales de 3x3, capas de Batch Normalization y regularización Dropout para evitar el sobreajuste.
+          </p>
+        </div>
+
+        <!-- Pillar 2 -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="18" cy="18" r="3"/>
+              <circle cx="6" cy="6" r="3"/>
+              <path d="M13 6h3a2 2 0 0 1 2 2v7"/>
+              <line x1="6" y1="9" x2="6" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Motor de Similitud Vectorial</h3>
+          <p class="pillar-text">
+            Mapeo de la entrada en el espacio euclidiano y angular mediante métricas de Coseno y distancia L2 para identificar las muestras reales más análogas de la base de datos de validación.
+          </p>
+        </div>
+
+        <!-- Pillar 3 -->
+        <div class="pillar-card">
+          <div class="pillar-icon-box">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+              <line x1="8" y1="21" x2="16" y2="21"/>
+              <line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h3 class="pillar-title">Despliegue Interactivo</h3>
+          <p class="pillar-text">
+            Integración de una interfaz gráfica reactiva en Streamlit que admite carga de archivos por arrastre, inspección de mapas de activación y reportes cuantitativos completos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section id="arquitectura" class="section-architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">Ingeniería de Modelos</span>
+        <h2 class="section-title">Topología de la Red Neuronal Convolucional</h2>
+        <p class="section-subtitle">
+          Estructura multicapa secuencial con 422,538 parámetros entrenados sobre representaciones tensoriales de 28x28x1.
+        </p>
+      </div>
+
+      <div class="arch-layout">
+        <!-- Layer Stack -->
+        <div class="layer-stack">
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">01</div>
+              <div>
+                <div class="layer-title">Input Layer</div>
+                <div class="layer-desc">Tensor monocromático escalado en [0.0, 1.0]</div>
+              </div>
+            </div>
+            <div class="layer-shape">(28, 28, 1)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">02</div>
+              <div>
+                <div class="layer-title">Bloque Convolucional 1</div>
+                <div class="layer-desc">Conv2D (32 filtros 3x3, ReLU) + BatchNorm + MaxPool(2x2) + Dropout(0.20)</div>
+              </div>
+            </div>
+            <div class="layer-shape">(14, 14, 32)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">03</div>
+              <div>
+                <div class="layer-title">Bloque Convolucional 2</div>
+                <div class="layer-desc">Conv2D (64 filtros 3x3, ReLU) + BatchNorm + MaxPool(2x2) + Dropout(0.25)</div>
+              </div>
+            </div>
+            <div class="layer-shape">(7, 7, 64)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">04</div>
+              <div>
+                <div class="layer-title">Capa de Aplanado (Flatten)</div>
+                <div class="layer-desc">Desenrollado de mapas de características a vector 1D</div>
+              </div>
+            </div>
+            <div class="layer-shape">(3,136 nodos)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">05</div>
+              <div>
+                <div class="layer-title">Capa Densa Oculta</div>
+                <div class="layer-desc">128 neuronas + Activación ReLU + BatchNorm + Dropout(0.35)</div>
+              </div>
+            </div>
+            <div class="layer-shape">(128 nodos)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">06</div>
+              <div>
+                <div class="layer-title">Capa de Salida Softmax</div>
+                <div class="layer-desc">Distribución de probabilidad sobre las 10 categorías de prendas</div>
+              </div>
+            </div>
+            <div class="layer-shape">(10 clases)</div>
+          </div>
+        </div>
+
+        <!-- Math Card -->
+        <div class="math-card">
+          <div class="math-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="9" x2="20" y2="9"/>
+              <line x1="4" y1="15" x2="20" y2="15"/>
+              <line x1="10" y1="3" x2="8" y2="21"/>
+              <line x1="16" y1="3" x2="14" y2="21"/>
+            </svg>
+            Fundamentación Matemática
+          </div>
+
+          <div class="math-block">
+            <div class="math-block-label">1. Convolución 2D Discreta</div>
+            <div class="math-formula">(I * K)(i, j) = &sum;<sub>m</sub> &sum;<sub>n</sub> I(i-m, j-n) &times; K(m, n)</div>
+            <div class="math-note">Extracción de características espaciales locales con parámetros compartidos.</div>
+          </div>
+
+          <div class="math-block">
+            <div class="math-block-label">2. Función Softmax Multiclase</div>
+            <div class="math-formula">P(y = c | x) = exp(z<sub>c</sub>) / &sum;<sub>j=1</sub><sup>10</sup> exp(z<sub>j</sub>)</div>
+            <div class="math-note">Mapea logits continuos a una distribución de probabilidades en el simplex unitario.</div>
+          </div>
+
+          <div class="math-block">
+            <div class="math-block-label">3. Similitud de Coseno</div>
+            <div class="math-formula">S<sub>cos</sub>(u, v) = (u &bull; v) / (||u||<sub>2</sub> &times; ||v||<sub>2</sub>)</div>
+            <div class="math-note">Cuantifica la correlación angular entre la imagen consultada y las referencias.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Tutorial Section -->
+  <section id="tutorial" class="section-tutorial">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">Módulo Pedagógico</span>
+        <h2 class="section-title">Tutorial Interactivo: Cómo Aprende la Red</h2>
+        <p class="section-subtitle">
+          Recorrido guiado paso a paso para comprender los principios matemáticos y de ingeniería aplicados en FashionVision AI.
+        </p>
+      </div>
+
+      <!-- Stepper Controls -->
+      <div id="tutorial-stepper" class="tutorial-stepper"></div>
+
+      <!-- Interactive Content Card -->
+      <div class="tutorial-content-card">
+        <div>
+          <div id="tutorial-badge" class="tutorial-badge">PASO 01 : CONVOLUCIÓN</div>
+          <h3 id="tutorial-heading" class="tutorial-heading">Operación de Convolución 2D</h3>
+          <p id="tutorial-desc" class="tutorial-desc">
+            A diferencia de las capas densas donde cada píxel se procesa de forma aislada, la convolución 2D desliza un filtro de 3x3 píxeles a través de la imagen, detectando bordes y siluetas.
+          </p>
+
+          <div class="math-block" style="margin-top: 1.25rem;">
+            <div class="math-block-label">Formulación Matemática:</div>
+            <div id="tutorial-formula" class="math-formula">(I * K)(i, j) = &sum;<sub>m</sub> &sum;<sub>n</sub> I(i-m, j-n) K(m, n)</div>
+          </div>
+        </div>
+
+        <div class="tutorial-visual-canvas" id="tutorial-canvas"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Glossary with Live Vector Simulations -->
+  <section id="glosario" class="section-glossary">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">Biblioteca de Conceptos</span>
+        <h2 class="section-title">Glosario Interactivo con Simulaciones</h2>
+        <p class="section-subtitle">
+          Experimenta con los conceptos fundamentales mediante simulaciones vectoriales SVG en vivo y visualiza el código fuente real del proyecto.
+        </p>
+      </div>
+
+      <div class="glossary-layout">
+        <!-- Sidebar Navigation -->
+        <div class="glossary-nav">
+          <button class="glossary-tab active" data-term="conv2d">
+            <span>Convolución 2D</span>
+            <span class="brand-badge">CNN</span>
+          </button>
+          <button class="glossary-tab" data-term="relu">
+            <span>Activación ReLU</span>
+            <span class="brand-badge">Math</span>
+          </button>
+          <button class="glossary-tab" data-term="maxpooling">
+            <span>MaxPooling 2D</span>
+            <span class="brand-badge">Pool</span>
+          </button>
+          <button class="glossary-tab" data-term="dropout">
+            <span>Dropout</span>
+            <span class="brand-badge">Reg</span>
+          </button>
+          <button class="glossary-tab" data-term="softmax">
+            <span>Función Softmax</span>
+            <span class="brand-badge">Prob</span>
+          </button>
+          <button class="glossary-tab" data-term="cosinesim">
+            <span>Similitud Coseno</span>
+            <span class="brand-badge">Search</span>
+          </button>
+        </div>
+
+        <!-- Main Display Panel -->
+        <div class="glossary-main-panel">
+          <div class="glossary-header-area">
+            <div>
+              <div class="glossary-term-title" id="glossary-title">Capa Convolucional 2D (Conv2D)</div>
+              <div class="glossary-term-category" id="glossary-category">Extracción de Características</div>
+            </div>
+            <span class="brand-badge" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #34d399;">
+              Interactivo
+            </span>
+          </div>
+
+          <p id="glossary-desc" style="color: var(--text-secondary); font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.75rem;">
+            Aplica un banco de filtros 3x3 que calculan el producto punto con vecindades locales de píxeles para generar mapas de activación de contornos y siluetas.
+          </p>
+
+          <div class="glossary-body-grid">
+            <!-- SVG Simulation Box -->
+            <div class="glossary-simulation-box">
+              <div class="glossary-simulation-header">
+                <span>Simulación Vectorial SVG</span>
+                <span style="color: #34d399; font-family: monospace;">Live Engine</span>
+              </div>
+              <div id="glossary-simulation-render"></div>
+            </div>
+
+            <!-- Code Viewer Box -->
+            <div class="glossary-code-box">
+              <div class="glossary-code-header">
+                <span>Código Fuente del Proyecto</span>
+                <span style="font-family: monospace; color: #64748b;">Python / TensorFlow</span>
+              </div>
+              <pre class="glossary-code-content" id="glossary-code"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="clases" class="section-classes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">Espacio de Clases</span>
+        <h2 class="section-title">Categorías del Dataset Fashion-MNIST</h2>
+        <p class="section-subtitle">
+          Taxonomía estándar desarrollada por Zalando Research con 7,000 imágenes por categoría.
+        </p>
+      </div>
+
+      <div class="classes-grid">
+        <!-- Class 0: T-shirt -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 0</div>
+          <div class="class-name">T-shirt/top</div>
+          <div class="class-translation">Camiseta / Top</div>
+        </div>
+
+        <!-- Class 1: Trouser -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16l-2 16h-4l-2-10-2 10H6L4 4z"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 1</div>
+          <div class="class-name">Trouser</div>
+          <div class="class-translation">Pantalón</div>
+        </div>
+
+        <!-- Class 2: Pullover -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l1.8 10.8a1 1 0 0 0 .99.84H7v4a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-4h1.55a1 1 0 0 0 .99-.84l1.8-10.8a2 2 0 0 0-1.34-2.23z"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 2</div>
+          <div class="class-name">Pullover</div>
+          <div class="class-translation">Jersey / Suéter</div>
+        </div>
+
+        <!-- Class 3: Dress -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 2h8l1 6-3 2 4 12H6l4-12-3-2 1-6z"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 3</div>
+          <div class="class-name">Dress</div>
+          <div class="class-translation">Vestido</div>
+        </div>
+
+        <!-- Class 4: Coat -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 3h16l-1 18H5L4 3z"/>
+              <line x1="12" y1="3" x2="12" y2="21"/>
+              <line x1="8" y1="3" x2="12" y2="9"/>
+              <line x1="16" y1="3" x2="12" y2="9"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 4</div>
+          <div class="class-name">Coat</div>
+          <div class="class-translation">Abrigo</div>
+        </div>
+
+        <!-- Class 5: Sandal -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 18h20v2H2z"/>
+              <path d="M6 18c0-4 3-7 7-7s7 3 7 7"/>
+              <line x1="10" y1="11" x2="10" y2="18"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 5</div>
+          <div class="class-name">Sandal</div>
+          <div class="class-translation">Sandalia</div>
+        </div>
+
+        <!-- Class 6: Shirt -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+              <line x1="12" y1="4" x2="12" y2="20"/>
+              <circle cx="12" cy="8" r="0.5"/>
+              <circle cx="12" cy="12" r="0.5"/>
+              <circle cx="12" cy="16" r="0.5"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 6</div>
+          <div class="class-name">Shirt</div>
+          <div class="class-translation">Camisa</div>
+        </div>
+
+        <!-- Class 7: Sneaker -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 16h20v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-3z"/>
+              <path d="M2 16l4-8h6l4 8"/>
+              <line x1="8" y1="12" x2="14" y2="12"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 7</div>
+          <div class="class-name">Sneaker</div>
+          <div class="class-translation">Zapatilla deportiva</div>
+        </div>
+
+        <!-- Class 8: Bag -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 8h12v11a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8z"/>
+              <path d="M9 8V5a3 3 0 0 1 6 0v3"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 8</div>
+          <div class="class-name">Bag</div>
+          <div class="class-translation">Bolso / Cartera</div>
+        </div>
+
+        <!-- Class 9: Ankle boot -->
+        <div class="class-card">
+          <div class="class-icon-wrapper">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 2h6v8l8 5v5H5V2z"/>
+              <line x1="5" y1="15" x2="11" y2="15"/>
+            </svg>
+          </div>
+          <div class="class-id">Clase 9</div>
+          <div class="class-name">Ankle boot</div>
+          <div class="class-translation">Botín</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparator Section -->
+  <section id="comparador" class="section-comparator">
+    <div class="container">
+      <div class="comparator-layout">
+        <div class="comparator-content">
+          <span class="section-pretitle">Análisis de Similitud</span>
+          <h3>Contraste Vectorial con Muestras Existentes</h3>
+          <p>
+            El sistema no solo predice la clase con una probabilidad Softmax; también proyecta la imagen subida en el espacio tensorial para recuperar los vecinos más cercanos en el conjunto de prueba de Fashion-MNIST.
+          </p>
+
+          <ul class="spec-list">
+            <li class="spec-item">
+              <span class="spec-bullet">&bull;</span>
+              <span><strong>Explicabilidad Visual:</strong> Permite comprobar si la prenda subida comparte patrones reales de textura y silueta con el conjunto de entrenamiento.</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-bullet">&bull;</span>
+              <span><strong>Métrica Coseno:</strong> Mide el ángulo entre vectores normalizados de 784 dimensiones, siendo invariante al brillo global de la captura.</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-bullet">&bull;</span>
+              <span><strong>Auditoría de Incertidumbre:</strong> Identifica cuándo una prenda se ubica en la frontera de decisión entre dos clases análogas (ej. Camisa vs Camiseta).</span>
+            </li>
+          </ul>
+
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-secondary sim-btn active" data-scenario="tshirt">Simular Camiseta</button>
+            <button class="btn btn-secondary sim-btn" data-scenario="trouser">Simular Pantalón</button>
+            <button class="btn btn-secondary sim-btn" data-scenario="sneaker">Simular Zapatilla</button>
+          </div>
+        </div>
+
+        <div class="simulator-box">
+          <div class="sim-header">
+            <span class="sim-title">Simulador de Recuperación Top-K</span>
+            <span class="sim-status">Online</span>
+          </div>
+
+          <div class="sim-grid">
+            <!-- Query Item -->
+            <div class="sim-item highlight">
+              <div class="sim-item-label">Consulta</div>
+              <div class="sim-item-display">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+                </svg>
+              </div>
+              <div class="sim-item-score" id="sim-query-title" style="color: #60a5fa;">Camiseta</div>
+              <div class="sim-item-class" id="sim-query-class">Clase 0</div>
+            </div>
+
+            <!-- Match 1 -->
+            <div class="sim-item">
+              <div class="sim-item-label">Top 1 Dataset</div>
+              <div class="sim-item-display">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2">
+                  <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+                </svg>
+              </div>
+              <div class="sim-item-score" id="sim-m1-score">98.4%</div>
+              <div class="sim-item-class" id="sim-m1-name">T-shirt/top</div>
+              <div class="sim-item-class" id="sim-m1-dist" style="font-size: 0.65rem; color: #64748b; margin-top: 2px;">Dist. Euc: 0.18</div>
+            </div>
+
+            <!-- Match 2 -->
+            <div class="sim-item">
+              <div class="sim-item-label">Top 2 Dataset</div>
+              <div class="sim-item-display">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2">
+                  <path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>
+                  <line x1="12" y1="4" x2="12" y2="20"/>
+                </svg>
+              </div>
+              <div class="sim-item-score" id="sim-m2-score">93.1%</div>
+              <div class="sim-item-class" id="sim-m2-name">Shirt</div>
+              <div class="sim-item-class" id="sim-m2-dist" style="font-size: 0.65rem; color: #64748b; margin-top: 2px;">Dist. Euc: 0.34</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deployment Guide Section -->
+  <section id="despliegue" class="section-guide">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">Despliegue Técnico</span>
+        <h2 class="section-title">Instrucciones de Ejecución</h2>
+        <p class="section-subtitle">
+          Pasos reproducibles para inicializar los servicios localmente o en servidores Linux/Windows.
+        </p>
+      </div>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-header">
+            <div class="guide-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/>
+                <line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-weight: 700; color: #ffffff;">Servidor Streamlit</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Aplicación interactiva web</div>
+            </div>
+          </div>
+
+          <div class="terminal-box">
+            <div class="terminal-comment"># 1. Instalar dependencias</div>
+            <div class="terminal-cmd">pip install -r requirements.txt</div>
+            <div class="terminal-comment"># 2. Iniciar el servicio Streamlit</div>
+            <div class="terminal-cmd">streamlit run app.py</div>
+            <div class="terminal-comment"># 3. Acceder en el navegador</div>
+            <div class="terminal-cmd" style="color: #34d399;">http://localhost:8501</div>
+          </div>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-header">
+            <div class="guide-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-weight: 700; color: #ffffff;">Cuaderno de Laboratorio</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Jupyter Notebook format</div>
+            </div>
+          </div>
+
+          <div class="terminal-box">
+            <div class="terminal-comment"># 1. Abrir el entorno Jupyter</div>
+            <div class="terminal-cmd">jupyter notebook fashion_mnist_redes_neuronales.ipynb</div>
+            <div class="terminal-comment"># 2. O compilar el entrenamiento por consola</div>
+            <div class="terminal-cmd">python train_model.py</div>
+            <div class="terminal-comment"># 3. Ejecutar inferencia en lote</div>
+            <div class="terminal-cmd" style="color: #38bdf8;">python -m pytest / test_suite</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div style="font-weight: 700; color: #ffffff; display: flex; align-items: center; gap: 0.5rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 2a4 4 0 0 1 4 4c0 .8-.2 1.5-.7 2.1l1.4 1.4A6 6 0 0 0 12 0a6 6 0 0 0-4.7 9.5l1.4-1.4A4 4 0 0 1 12 2z"/>
+        </svg>
+        FashionVision AI &bull; Proyecto Integrador
+      </div>
+      <p class="footer-text">
+        Entrega integradora para la asignatura de <strong>Redes Neuronales</strong>. Implementación de Deep Learning basada en TensorFlow, Keras y Streamlit, estructurada para despliegue en GitHub Pages.
+      </p>
+      <div class="footer-copy">
+        Dataset Fashion-MNIST &copy; Zalando Research &bull; Licencia MIT &bull; Todos los derechos reservados
+      </div>
+    </div>
+  </footer>
+
+  <!-- Local Script -->
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
