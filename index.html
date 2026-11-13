@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FashionVision AI | Sistema Convolucional de Redes Neuronales</title>
+
+  <!-- Local Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Top Navigation Header (Technical Developer Style) -->
+  <header class="header">
+    <div class="container nav-wrapper">
+      <div class="nav-left">
+        <a href="#proyecto" class="brand-link" title="FashionVision AI · Redes Neuronales">
+          <span class="brand-glyph">FV</span>
+          <img src="assets/images/robot-logo.png" alt="Robot AI Logo" class="brand-robot-logo">
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#proyecto" class="nav-link" data-i18n="nav_home">INICIO</a></li>
+          <li><a href="#arquitectura" class="nav-link" data-i18n="nav_arch">ARQUITECTURA <span class="chevron">▾</span></a></li>
+          <li><a href="#tutorial" class="nav-link" data-i18n="nav_tut">TUTORIAL <span class="chevron">▾</span></a></li>
+          <li><a href="#glosario" class="nav-link" data-i18n="nav_gloss">GLOSARIO</a></li>
+          <li><a href="#clases" class="nav-link" data-i18n="nav_data">DATASET</a></li>
+          <li><a href="#comparador" class="nav-link" data-i18n="nav_comp">COMPARADOR</a></li>
+          <li><a href="javascript:void(0)" class="nav-link" id="nav-btn-doc" data-i18n="nav_doc" style="color: var(--craft-blue); font-weight: 800;">DOCUMENTACIÓN</a></li>
+          <li><a href="https://rn-fucn.streamlit.app/" target="_blank" class="nav-badge-pill" data-i18n="nav_badge">LABORATORIO IA</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <!-- Bilingual Language Toggle Button (ES / EN) -->
+        <button id="lang-toggle" class="nav-lang-btn" title="Cambiar Idioma (Español / English)" aria-label="Cambiar idioma">
+          <span class="lang-icon">🌐</span>
+          <span id="lang-indicator" class="lang-indicator">ES</span>
+        </button>
+
+        <!-- Official GitHub Link -->
+        <a href="https://github.com/feibertciin/RN.git" target="_blank" class="nav-icon-btn" title="Repositorio GitHub: feibertciin/RN" aria-label="GitHub Repository">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+
+        <!-- Moon Theme Toggle Button -->
+        <button id="theme-toggle" class="nav-icon-btn" title="Alternar Modo Oscuro / Claro" aria-label="Theme toggle">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+
+        <!-- Launch App Primary Action pointing to Streamlit Cloud -->
+        <a href="https://rn-fucn.streamlit.app/" target="_blank" class="btn-launch" data-i18n="nav_launch">
+          LANZAR APP
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Technical Sub-header Hairline Bar -->
+  <div class="sub-header-bar">
+    <div class="container sub-header-content">
+      <div class="sub-header-left">
+        <span class="tech-num">01</span> / <span data-i18n="sub_left">REDES NEURONALES CONVOLUCIONALES</span>
+      </div>
+      <div class="sub-header-center" data-i18n="sub_center">
+        VISIÓN COMPUTACIONAL &bull; FASHION-MNIST &bull; DEEP LEARNING V2.1
+      </div>
+      <div class="sub-header-right">
+        FASHIONVISION AI
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section id="proyecto" class="hero">
+    <div class="container">
+      <div class="hero-layout-wrapper">
+        
+        <!-- Royal Blue Squircle Robot Icon (Robot Illustration) -->
+        <div class="hero-badge-container">
+          <img src="assets/images/hero-robot-badge.png" alt="Robot Android AI Icon" class="hero-robot-badge">
+        </div>
+
+        <!-- Tag row: [CNN] FashionVision AI -->
+        <div class="hero-tag-row">
+          <span class="tag-num-box">CNN</span>
+          <span class="tag-name-label" data-i18n="hero_tag">FashionVision AI</span>
+        </div>
+
+        <!-- Huge Main Headline Centered on the Subject -->
+        <h1 class="hero-main-title" data-i18n="hero_title">
+          Comprende cómo aprende la visión artificial, luego<br>
+          <span class="hero-title-highlight">entrena tu propia red.</span>
+        </h1>
+
+        <!-- Subtitle Centered on FashionVision AI -->
+        <p class="hero-tagline" data-i18n="hero_tagline">
+          Solución integral de visión por computadora basada en redes neuronales convolucionales (CNN). Diseñada para clasificar prendas textiles con 90.15% de precisión, inspeccionar mapas de activación y contrastar similitud vectorial en tiempo real sobre Fashion-MNIST.
+        </p>
+
+        <!-- Button Toolbar Group with Verified Official Links -->
+        <div class="hero-toolbar-row">
+          <!-- Streamlit Cloud Link -->
+          <a href="https://rn-fucn.streamlit.app/" target="_blank" class="btn-tool btn-tool-dark" data-i18n="btn_lab">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            ABRIR LABORATORIO WEB
+          </a>
+
+          <!-- Interactive Modal Documentation Button -->
+          <button id="btn-open-doc" class="btn-tool btn-tool-light" data-i18n="btn_docs">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+              <line x1="9" y1="3" x2="9" y2="21" />
+            </svg>
+            DOCUMENTACIÓN COMPLETA
+          </button>
+
+          <!-- GitHub Official Repo Link -->
+          <a href="https://github.com/feibertciin/RN.git" target="_blank" class="btn-tool btn-tool-light">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            GITHUB REPO
+          </a>
+
+          <!-- Google Colab Notebook Link -->
+          <a href="https://colab.research.google.com/github/feibertciin/RN/blob/main/CNN-tutor.ipynb" target="_blank" class="btn-tool btn-tool-colab" title="Abrir CNN-tutor.ipynb en Google Colab">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="height: 17px; vertical-align: middle;">
+            <span data-i18n="btn_colab">TUTOR COLAB</span>
+          </a>
+
+          <a href="#arquitectura" class="btn-tool btn-tool-light" data-i18n="btn_arch">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+            VER ARQUITECTURA
+          </a>
+        </div>
+
+        <!-- Sub-specs info -->
+        <div class="hero-specs-area">
+          <span class="hero-specs-arch" data-i18n="hero_specs">MODELO CNN: 422,538 PARÁMETROS &bull; KERAS &amp; TENSORFLOW 2.x &bull; LATENCIA &lt; 18 MS</span>
+          <a href="https://rn-fucn.streamlit.app/" target="_blank" class="hero-specs-link" data-i18n="hero_sublink">Lanzar aplicación en vivo en Streamlit Cloud (rn-fucn.streamlit.app)</a>
+        </div>
+
+        <!-- Floating Vertical Right Sidebar Index (Matches reference layout) -->
+        <aside class="hero-side-index">
+          <a href="#proyecto" class="side-index-item active" data-i18n="side_home">INICIO</a>
+          <a href="#arquitectura" class="side-index-item" data-i18n="side_arch">ARQUITECTURA</a>
+          <a href="#tutorial" class="side-index-item" data-i18n="side_tut">TUTORIAL</a>
+          <a href="#glosario" class="side-index-item" data-i18n="side_gloss">GLOSARIO</a>
+          <a href="#clases" class="side-index-item" data-i18n="side_data">DATASET</a>
+          <a href="#comparador" class="side-index-item" data-i18n="side_comp">COMPARADOR</a>
+          <a href="#despliegue" class="side-index-item" data-i18n="side_deploy">DESPLIEGUE</a>
+        </aside>
+
+      </div>
+
+      <!-- Real-time Metrics & Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-acc">90.15%</div>
+          <div class="stat-label" data-i18n="stat_acc">Test Accuracy</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-classes">10 Clases</div>
+          <div class="stat-label" data-i18n="stat_classes">Categorías de Moda</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-time">&lt; 18 ms</div>
+          <div class="stat-label" data-i18n="stat_time">Latencia de Inferencia</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-samples">70,000</div>
+          <div class="stat-label" data-i18n="stat_samples">Muestras Evaluadas</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Feature Pillars with Custom Robot Icon Images -->
+  <section class="section-pillars">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle" data-i18n="pillars_pre">Arquitectura del Sistema</span>
+        <h2 class="section-title" data-i18n="pillars_title">Pilares Técnicos del Proyecto</h2>
+        <p class="section-subtitle" data-i18n="pillars_sub">
+          Diseñado para cumplir con los requerimientos académicos de experimentación rigurosa y las exigencias de
+          despliegue en entornos reales.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <!-- Pillar 1: CNN Robot -->
+        <div class="pillar-card">
+          <div class="pillar-robot-box">
+            <img src="assets/images/robot-cnn.png" alt="Robot Scanner CNN" class="pillar-robot-img">
+          </div>
+          <h3 class="pillar-title" data-i18n="p1_title">Red Convolucional (CNN)</h3>
+          <p class="pillar-text" data-i18n="p1_desc">
+            Extracción jerárquica de características morfológicas mediante filtros bidimensionales de 3x3, capas de
+            Batch Normalization y regularización Dropout para evitar el sobreajuste.
+          </p>
+        </div>
+
+        <!-- Pillar 2: Vector Core Robot -->
+        <div class="pillar-card">
+          <div class="pillar-robot-box">
+            <img src="assets/images/robot-vector.png" alt="Robot Vectorial Core" class="pillar-robot-img">
+          </div>
+          <h3 class="pillar-title" data-i18n="p2_title">Motor de Similitud Vectorial</h3>
+          <p class="pillar-text" data-i18n="p2_desc">
+            Mapeo de la entrada en el espacio euclidiano y angular mediante métricas de Coseno y distancia L2 para
+            identificar las muestras reales más análogas de la base de datos de validación.
+          </p>
+        </div>
+
+        <!-- Pillar 3: Deployment Robot -->
+        <div class="pillar-card">
+          <div class="pillar-robot-box">
+            <img src="assets/images/robot-deploy.png" alt="Robot Streamlit Deploy" class="pillar-robot-img">
+          </div>
+          <h3 class="pillar-title" data-i18n="p3_title">Despliegue Interactivo</h3>
+          <p class="pillar-text" data-i18n="p3_desc">
+            Integración de una interfaz gráfica reactiva en Streamlit que admite carga de archivos por arrastre,
+            inspección de mapas de activación y reportes cuantitativos completos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Section -->
+  <section id="arquitectura" class="section-architecture">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">
+          <img src="assets/images/robot-math.png" alt="Robot Math" class="robot-section-avatar">
+          <span data-i18n="arch_pre">Ingeniería de Modelos</span>
+        </span>
+        <h2 class="section-title" data-i18n="arch_title">Topología de la Red Neuronal Convolucional</h2>
+        <p class="section-subtitle" data-i18n="arch_sub">
+          Estructura multicapa secuencial con 422,538 parámetros entrenados sobre representaciones tensoriales de
+          28x28x1.
+        </p>
+      </div>
+
+      <div class="arch-layout">
+        <!-- Layer Stack -->
+        <div class="layer-stack">
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">01</div>
+              <div>
+                <div class="layer-title" data-i18n="l1_title">Input Layer (Entrada)</div>
+                <div class="layer-desc" data-i18n="l1_desc">Tensor monocromático escalado en el rango [0.0, 1.0]</div>
+              </div>
+            </div>
+            <div class="layer-shape">(28, 28, 1)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">02</div>
+              <div>
+                <div class="layer-title" data-i18n="l2_title">Bloque Convolucional 1</div>
+                <div class="layer-desc" data-i18n="l2_desc">Conv2D (32 filtros 3x3, ReLU) + BatchNorm + MaxPool(2x2) + Dropout(0.20)</div>
+              </div>
+            </div>
+            <div class="layer-shape">(14, 14, 32)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">03</div>
+              <div>
+                <div class="layer-title" data-i18n="l3_title">Bloque Convolucional 2</div>
+                <div class="layer-desc" data-i18n="l3_desc">Conv2D (64 filtros 3x3, ReLU) + BatchNorm + MaxPool(2x2) + Dropout(0.25)</div>
+              </div>
+            </div>
+            <div class="layer-shape">(7, 7, 64)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">04</div>
+              <div>
+                <div class="layer-title" data-i18n="l4_title">Capa de Aplanado (Flatten)</div>
+                <div class="layer-desc" data-i18n="l4_desc">Desenrollado de mapas bidimensionales a vector denso 1D</div>
+              </div>
+            </div>
+            <div class="layer-shape">(3,136 nodos)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">05</div>
+              <div>
+                <div class="layer-title" data-i18n="l5_title">Capa Densa Oculta</div>
+                <div class="layer-desc" data-i18n="l5_desc">128 neuronas + Activación ReLU + BatchNorm + Dropout(0.35)</div>
+              </div>
+            </div>
+            <div class="layer-shape">(128 nodos)</div>
+          </div>
+
+          <div class="layer-item">
+            <div class="layer-info">
+              <div class="layer-index">06</div>
+              <div>
+                <div class="layer-title" data-i18n="l6_title">Capa de Salida Softmax</div>
+                <div class="layer-desc" data-i18n="l6_desc">Distribución de probabilidades sobre las 10 categorías de moda</div>
+              </div>
+            </div>
+            <div class="layer-shape">(10 clases)</div>
+          </div>
+        </div>
+
+        <!-- Math Card -->
+        <div class="math-card">
+          <div class="math-title">
+            <img src="assets/images/robot-math.png" alt="Robot Math Unit"
+              style="width: 24px; height: 24px; border-radius: 4px;">
+            <span data-i18n="math_title">Fundamentación Matemática</span>
+          </div>
+
+          <div class="math-block">
+            <div class="math-block-label" data-i18n="math_b1_label">1. Convolución 2D Discreta</div>
+            <div class="math-formula">(I * K)(i, j) = &sum;<sub>m</sub> &sum;<sub>n</sub> I(i-m, j-n) &times; K(m, n)</div>
+            <div class="math-note" data-i18n="math_b1_desc">Extracción de características espaciales locales con parámetros compartidos.</div>
+          </div>
+
+          <div class="math-block">
+            <div class="math-block-label" data-i18n="math_b2_label">2. Función Softmax Multiclase</div>
+            <div class="math-formula">P(y = c | x) = exp(z<sub>c</sub>) / &sum;<sub>j=1</sub><sup>10</sup> exp(z<sub>j</sub>)</div>
+            <div class="math-note" data-i18n="math_b2_desc">Mapea logits continuos a una distribución de probabilidades en el simplex unitario.</div>
+          </div>
+
+          <div class="math-block">
+            <div class="math-block-label" data-i18n="math_b3_label">3. Similitud de Coseno</div>
+            <div class="math-formula">S<sub>cos</sub>(u, v) = (u &bull; v) / (||u||<sub>2</sub> &times; ||v||<sub>2</sub>)</div>
+            <div class="math-note" data-i18n="math_b3_desc">Cuantifica la correlación angular entre la imagen consultada y las referencias.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Tutorial Section -->
+  <section id="tutorial" class="section-tutorial">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">
+          <img src="assets/images/robot-tutorial.png" alt="Robot Tutor" class="robot-section-avatar">
+          <span data-i18n="tut_pre">Módulo Pedagógico</span>
+        </span>
+        <h2 class="section-title" data-i18n="tut_title">Tutorial Interactivo: Cómo Aprende la Red</h2>
+        <p class="section-subtitle" data-i18n="tut_sub">
+          Recorrido guiado paso a paso para comprender los principios matemáticos y de ingeniería aplicados en
+          FashionVision AI.
+        </p>
+      </div>
+
+      <!-- Stepper Controls -->
+      <div id="tutorial-stepper" class="tutorial-stepper"></div>
+
+      <!-- Interactive Content Card -->
+      <div class="tutorial-content-card">
+        <div>
+          <div id="tutorial-badge" class="tutorial-badge">PASO 01 : CONVOLUCIÓN</div>
+          <h3 id="tutorial-heading" class="tutorial-heading">Operación de Convolución 2D</h3>
+          <p id="tutorial-desc" class="tutorial-desc">
+            A diferencia de las capas densas donde cada píxel se procesa de forma aislada, la convolución 2D desliza un
+            filtro de 3x3 píxeles a través de la imagen, detectando bordes y siluetas.
+          </p>
+
+          <div class="math-block" style="margin-top: 1.25rem;">
+            <div class="math-block-label" data-i18n="tut_form_label">Formulación Matemática:</div>
+            <div id="tutorial-formula" class="math-formula">(I * K)(i, j) = &sum;<sub>m</sub> &sum;<sub>n</sub> I(i-m, j-n) K(m, n)</div>
+          </div>
+        </div>
+
+        <div class="tutorial-visual-canvas" id="tutorial-canvas"></div>
+      </div>
+
+      <!-- Google Colab Tutor Notebook Integration Card -->
+      <div class="colab-feature-card">
+        <div class="colab-card-left">
+          <div class="colab-icon-box">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <circle cx="7.5" cy="12" r="4.5" stroke="#f59e0b" stroke-width="2.2" fill="rgba(245, 158, 11, 0.15)"/>
+              <circle cx="16.5" cy="12" r="4.5" stroke="#d97706" stroke-width="2.2" fill="rgba(217, 119, 6, 0.15)"/>
+              <path d="M10 12h4" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <div class="colab-card-tag" data-i18n="colab_tag">CUADERNO DIDÁCTICO EN LA NUBE &bull; JUPYTER / COLAB</div>
+            <h3 class="colab-card-title">
+              CNN-tutor.ipynb
+              <span class="colab-badge-chip">GPU ACCELERATED</span>
+            </h3>
+            <p class="colab-card-desc" data-i18n="colab_desc">
+              Ejecuta el cuaderno pedagógico completo directamente en los servidores en la nube de <strong>Google Colab</strong> con aceleración por GPU sin necesidad de configurar entornos locales. Explora la fundamentación teórica, arquitecturas neuronales, operaciones matemáticas y experimentación interactiva.
+            </p>
+            <div class="colab-card-specs">
+              <span>⚡ TensorFlow 2.x &amp; Keras</span>
+              <span>&bull;</span>
+              <span>📓 CNN-tutor.ipynb</span>
+              <span>&bull;</span>
+              <span>☁️ Google Colab Cloud Engine</span>
+            </div>
+          </div>
+        </div>
+        <div class="colab-card-right">
+          <a href="https://colab.research.google.com/github/feibertciin/RN/blob/main/CNN-tutor.ipynb" target="_blank" class="btn-open-colab" title="Abrir CNN-tutor.ipynb en Google Colab">
+            <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" class="colab-badge-img">
+            <span data-i18n="btn_colab_cta">ABRIR EN COLAB</span>
+          </a>
+          <span class="colab-subnote" data-i18n="colab_subnote">Ejecución interactiva gratuita en la nube con GPU en 1 clic</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Glossary with Live Simulations -->
+  <section id="glosario" class="section-glossary">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">
+          <img src="assets/images/robot-glossary.png" alt="Robot Glossary" class="robot-section-avatar">
+          <span data-i18n="gloss_pre">Biblioteca de Conceptos</span>
+        </span>
+        <h2 class="section-title" data-i18n="gloss_title">Glosario Interactivo con Simulaciones</h2>
+        <p class="section-subtitle" data-i18n="gloss_sub">
+          Experimenta con los conceptos fundamentales mediante simulaciones vectoriales SVG en vivo y visualiza el
+          código fuente real del proyecto.
+        </p>
+      </div>
+
+      <div class="glossary-layout">
+        <!-- Sidebar Navigation -->
+        <div class="glossary-nav">
+          <button class="glossary-tab active" data-term="conv2d">
+            <span data-i18n="gtab_conv">Convolución 2D</span>
+            <span class="tab-badge">CNN</span>
+          </button>
+          <button class="glossary-tab" data-term="relu">
+            <span data-i18n="gtab_relu">Activación ReLU</span>
+            <span class="tab-badge">Math</span>
+          </button>
+          <button class="glossary-tab" data-term="maxpooling">
+            <span data-i18n="gtab_pool">MaxPooling 2D</span>
+            <span class="tab-badge">Pool</span>
+          </button>
+          <button class="glossary-tab" data-term="dropout">
+            <span data-i18n="gtab_drop">Dropout</span>
+            <span class="tab-badge">Reg</span>
+          </button>
+          <button class="glossary-tab" data-term="softmax">
+            <span data-i18n="gtab_soft">Función Softmax</span>
+            <span class="tab-badge">Prob</span>
+          </button>
+          <button class="glossary-tab" data-term="cosinesim">
+            <span data-i18n="gtab_cos">Similitud Coseno</span>
+            <span class="tab-badge">Search</span>
+          </button>
+        </div>
+
+        <!-- Main Display Panel -->
+        <div class="glossary-main-panel">
+          <div class="glossary-header-area">
+            <div>
+              <div class="glossary-term-title" id="glossary-title">Capa Convolucional 2D (Conv2D)</div>
+              <div class="glossary-term-category" id="glossary-category">Extracción de Características</div>
+            </div>
+            <span class="sim-status" data-i18n="live_interactive">Interactivo</span>
+          </div>
+
+          <p id="glossary-desc"
+            style="color: var(--text-secondary); font-size: 0.925rem; line-height: 1.6; margin-bottom: 1.5rem;">
+            Aplica un banco de filtros 3x3 que calculan el producto punto con vecindades locales de píxeles para generar
+            mapas de activación de contornos y siluetas.
+          </p>
+
+          <div class="glossary-body-grid">
+            <!-- SVG Simulation Box -->
+            <div class="glossary-simulation-box">
+              <div class="glossary-box-header">
+                <span data-i18n="svg_sim_header">Simulación Vectorial SVG</span>
+                <span style="color: var(--accent-emerald);">Live Engine</span>
+              </div>
+              <div id="glossary-simulation-render"></div>
+            </div>
+
+            <!-- Code Viewer Box -->
+            <div class="glossary-code-box">
+              <div class="glossary-box-header">
+                <span data-i18n="code_box_header">Código Fuente del Proyecto</span>
+                <span>Python / Keras</span>
+              </div>
+              <pre class="glossary-code-content" id="glossary-code"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dataset Clothing Classes Section With Robot Images -->
+  <section id="clases" class="section-classes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle" data-i18n="data_pre">Espacio de Clases</span>
+        <h2 class="section-title" data-i18n="data_title">Categorías del Dataset Fashion-MNIST</h2>
+        <p class="section-subtitle" data-i18n="data_sub">
+          Taxonomía estándar de 10 clases desarrollada por Zalando Research con 7,000 imágenes por categoría, representada por unidades mecha robotizadas.
+        </p>
+      </div>
+
+      <div class="classes-grid">
+        <!-- Class 0: T-shirt -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-0.png" alt="Robot Unidad 0 - T-shirt" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 0 &bull; Chassis Mk-I</div>
+          <div class="class-name">T-shirt/top</div>
+          <div class="class-translation" data-i18n="c0_name">Camiseta / Top</div>
+        </div>
+
+        <!-- Class 1: Trouser -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-1.png" alt="Robot Unidad 1 - Trouser" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 1 &bull; Strider Mk-II</div>
+          <div class="class-name">Trouser</div>
+          <div class="class-translation" data-i18n="c1_name">Pantalón</div>
+        </div>
+
+        <!-- Class 2: Pullover -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-2.png" alt="Robot Unidad 2 - Pullover" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 2 &bull; Armor Mk-III</div>
+          <div class="class-name">Pullover</div>
+          <div class="class-translation" data-i18n="c2_name">Jersey / Suéter</div>
+        </div>
+
+        <!-- Class 3: Dress -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-3.png" alt="Robot Unidad 3 - Dress" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 3 &bull; Frame Mk-IV</div>
+          <div class="class-name">Dress</div>
+          <div class="class-translation" data-i18n="c3_name">Vestido</div>
+        </div>
+
+        <!-- Class 4: Coat -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-4.png" alt="Robot Unidad 4 - Coat" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 4 &bull; Exoskeleton Mk-V</div>
+          <div class="class-name">Coat</div>
+          <div class="class-translation" data-i18n="c4_name">Abrigo</div>
+        </div>
+
+        <!-- Class 5: Sandal -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-5.png" alt="Robot Unidad 5 - Sandal" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 5 &bull; Actuator Mk-VI</div>
+          <div class="class-name">Sandal</div>
+          <div class="class-translation" data-i18n="c5_name">Sandalia</div>
+        </div>
+
+        <!-- Class 6: Shirt -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-6.png" alt="Robot Unidad 6 - Shirt" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 6 &bull; Core Mk-VII</div>
+          <div class="class-name">Shirt</div>
+          <div class="class-translation" data-i18n="c6_name">Camisa</div>
+        </div>
+
+        <!-- Class 7: Sneaker -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-7.png" alt="Robot Unidad 7 - Sneaker" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 7 &bull; Thruster Mk-VIII</div>
+          <div class="class-name">Sneaker</div>
+          <div class="class-translation" data-i18n="c7_name">Zapatilla deportiva</div>
+        </div>
+
+        <!-- Class 8: Bag -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-8.png" alt="Robot Unidad 8 - Bag" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 8 &bull; Drone Mk-IX</div>
+          <div class="class-name">Bag</div>
+          <div class="class-translation" data-i18n="c8_name">Bolso / Cartera</div>
+        </div>
+
+        <!-- Class 9: Ankle boot -->
+        <div class="class-card">
+          <div class="class-robot-box">
+            <img src="assets/images/robot-class-9.png" alt="Robot Unidad 9 - Ankle Boot" class="class-robot-avatar">
+          </div>
+          <div class="class-id">Clase 9 &bull; Stomper Mk-X</div>
+          <div class="class-name">Ankle boot</div>
+          <div class="class-translation" data-i18n="c9_name">Botín</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparator Top-K Section with Robot Images -->
+  <section id="comparador" class="section-comparator">
+    <div class="container">
+      <div class="comparator-layout">
+        <div class="comparator-content">
+          <span class="section-pretitle">
+            <img src="assets/images/robot-comparator.png" alt="Robot Scanner" class="robot-section-avatar">
+            <span data-i18n="comp_pre">Análisis de Similitud</span>
+          </span>
+          <h2 class="section-title" data-i18n="comp_title">Contraste Vectorial con Muestras Existentes</h2>
+          <p class="section-subtitle" data-i18n="comp_sub">
+            El sistema no solo predice la clase con una distribución de probabilidad Softmax; también proyecta la imagen en el espacio tensorial para recuperar los vecinos más cercanos en el conjunto de prueba de Fashion-MNIST.
+          </p>
+
+          <ul class="spec-list">
+            <li class="spec-item">
+              <span class="spec-bullet">&bull;</span>
+              <span data-i18n="comp_p1"><strong>Explicabilidad Visual:</strong> Permite comprobar si la prenda subida comparte patrones reales de textura y silueta con el conjunto de entrenamiento.</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-bullet">&bull;</span>
+              <span data-i18n="comp_p2"><strong>Métrica Coseno:</strong> Mide el ángulo entre vectores normalizados de 784 dimensiones, siendo invariante al brillo global de la captura.</span>
+            </li>
+            <li class="spec-item">
+              <span class="spec-bullet">&bull;</span>
+              <span data-i18n="comp_p3"><strong>Auditoría de Incertidumbre:</strong> Identifica cuándo una prenda se ubica en la frontera de decisión entre dos clases análogas (ej. Camisa vs Camiseta).</span>
+            </li>
+          </ul>
+
+          <div class="sim-btn-group">
+            <button class="sim-btn active" data-scenario="tshirt" data-i18n="sim_btn_tshirt">Simular Camiseta</button>
+            <button class="sim-btn" data-scenario="trouser" data-i18n="sim_btn_trouser">Simular Pantalón</button>
+            <button class="sim-btn" data-scenario="sneaker" data-i18n="sim_btn_sneaker">Simular Zapatilla</button>
+          </div>
+        </div>
+
+        <div class="simulator-box">
+          <div class="sim-header">
+            <span class="sim-title">
+              <img src="assets/images/robot-comparator.png" alt="Robot Scanner"
+                style="width: 22px; height: 22px; border-radius: 4px;">
+              <span data-i18n="sim_box_title">Simulador de Recuperación Top-K</span>
+            </span>
+            <span class="sim-status">Online</span>
+          </div>
+
+          <div class="sim-grid">
+            <!-- Query Item -->
+            <div class="sim-item highlight">
+              <div class="sim-item-label" data-i18n="sim_label_query">Consulta</div>
+              <img src="assets/images/robot-class-0.png" alt="Consulta Robot" class="sim-robot-img" id="sim-query-img">
+              <div class="sim-item-score" id="sim-query-title" style="color: var(--craft-blue);">Camiseta</div>
+              <div class="sim-item-class" id="sim-query-class">Clase 0</div>
+            </div>
+
+            <!-- Match 1 -->
+            <div class="sim-item">
+              <div class="sim-item-label" data-i18n="sim_label_top1">Top 1 Dataset</div>
+              <img src="assets/images/robot-class-0.png" alt="Top 1 Robot" class="sim-robot-img" id="sim-m1-img">
+              <div class="sim-item-score" id="sim-m1-score" style="color: var(--accent-emerald);">98.4%</div>
+              <div class="sim-item-class" id="sim-m1-name">T-shirt/top</div>
+              <div class="sim-item-class" id="sim-m1-dist" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 2px;">
+                Dist. Euc: 0.18</div>
+            </div>
+
+            <!-- Match 2 -->
+            <div class="sim-item">
+              <div class="sim-item-label" data-i18n="sim_label_top2">Top 2 Dataset</div>
+              <img src="assets/images/robot-class-6.png" alt="Top 2 Robot" class="sim-robot-img" id="sim-m2-img">
+              <div class="sim-item-score" id="sim-m2-score">93.1%</div>
+              <div class="sim-item-class" id="sim-m2-name">Shirt</div>
+              <div class="sim-item-class" id="sim-m2-dist" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 2px;">
+                Dist. Euc: 0.34</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Deployment Guide Section -->
+  <section id="despliegue" class="section-guide">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-pretitle">
+          <img src="assets/images/robot-deploy.png" alt="Robot Deploy" class="robot-section-avatar">
+          <span data-i18n="deploy_pre">Despliegue Técnico</span>
+        </span>
+        <h2 class="section-title" data-i18n="deploy_title">Instrucciones de Ejecución</h2>
+        <p class="section-subtitle" data-i18n="deploy_sub">
+          Pasos reproducibles para inicializar los servicios localmente o en servidores Linux/Windows.
+        </p>
+      </div>
+
+      <div class="guide-grid">
+        <div class="guide-card">
+          <div class="guide-header">
+            <img src="assets/images/robot-deploy.png" alt="Robot Streamlit"
+              style="width: 38px; height: 38px; border-radius: 8px;">
+            <div>
+              <div style="font-weight: 800; color: var(--text-title); font-size: 1rem;" data-i18n="srv_streamlit">Servidor Streamlit</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="srv_streamlit_desc">Aplicación interactiva web de clasificación</div>
+            </div>
+          </div>
+
+          <div class="terminal-box">
+            <div class="terminal-comment" data-i18n="cmd_c1"># 1. Instalar dependencias</div>
+            <div class="terminal-cmd">pip install -r requirements.txt</div>
+            <div class="terminal-comment" data-i18n="cmd_c2"># 2. Iniciar el servicio Streamlit</div>
+            <div class="terminal-cmd">streamlit run app.py</div>
+            <div class="terminal-comment"># 3. Aplicación en vivo en Streamlit Cloud:</div>
+            <div class="terminal-cmd" style="color: var(--accent-emerald);">https://rn-fucn.streamlit.app/</div>
+          </div>
+        </div>
+
+        <div class="guide-card">
+          <div class="guide-header">
+            <img src="assets/images/robot-math.png" alt="Robot Notebook"
+              style="width: 38px; height: 38px; border-radius: 8px;">
+            <div>
+              <div style="font-weight: 800; color: var(--text-title); font-size: 1rem;" data-i18n="srv_jupyter">Repositorio Oficial &amp; Código</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="srv_jupyter_desc">GitHub Repository &amp; Jupyter Notebook</div>
+            </div>
+          </div>
+
+          <div class="terminal-box">
+            <div class="terminal-comment"># 1. Clonar el repositorio oficial:</div>
+            <div class="terminal-cmd" style="color: var(--craft-blue);">git clone https://github.com/feibertciin/RN.git</div>
+            <div class="terminal-comment" data-i18n="cmd_c4"># 2. Abrir el entorno Jupyter</div>
+            <div class="terminal-cmd">jupyter notebook fashion_mnist_redes_neuronales.ipynb</div>
+            <div class="terminal-comment" data-i18n="cmd_c5"># 3. O compilar el entrenamiento por consola</div>
+            <div class="terminal-cmd">python train_model.py</div>
+          </div>
+        </div>
+
+        <div class="guide-card" style="border-top: 3px solid #f59e0b;">
+          <div class="guide-header">
+            <div style="width: 38px; height: 38px; border-radius: 8px; background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; border: 1px solid rgba(245, 158, 11, 0.3);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="7.5" cy="12" r="4.5" stroke="#f59e0b" stroke-width="2.2" fill="rgba(245, 158, 11, 0.2)"/>
+                <circle cx="16.5" cy="12" r="4.5" stroke="#d97706" stroke-width="2.2" fill="rgba(217, 119, 6, 0.2)"/>
+                <path d="M10 12h4" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-weight: 800; color: var(--text-title); font-size: 1rem;" data-i18n="srv_colab">Google Colab Cloud</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);" data-i18n="srv_colab_desc">Entorno interactivo con aceleración GPU gratuita</div>
+            </div>
+          </div>
+
+          <div class="terminal-box">
+            <div class="terminal-comment"># 1. Cuaderno didáctico interactivo:</div>
+            <div class="terminal-cmd" style="color: #f59e0b;">CNN-tutor.ipynb</div>
+            <div class="terminal-comment"># 2. Abrir directamente en Colab:</div>
+            <div class="terminal-cmd" style="word-break: break-all;">
+              <a href="https://colab.research.google.com/github/feibertciin/RN/blob/main/CNN-tutor.ipynb" target="_blank" style="color: #fbbf24; text-decoration: underline;">
+                colab.research.google.com/.../CNN-tutor.ipynb
+              </a>
+            </div>
+            <div style="margin-top: 0.75rem;">
+              <a href="https://colab.research.google.com/github/feibertciin/RN/blob/main/CNN-tutor.ipynb" target="_blank" class="btn-open-colab" style="padding: 0.45rem 0.9rem; font-size: 0.7rem; width: 100%; justify-content: center;">
+                <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" style="height: 18px;">
+                <span data-i18n="btn_colab_cta">ABRIR EN COLAB</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <img src="assets/images/robot-logo.png" alt="Robot Logo" class="footer-robot-logo">
+        <span>FashionVision AI &bull; Redes Neuronales</span>
+      </div>
+      <p class="footer-text" data-i18n="footer_text">
+        Entrega integradora para la asignatura de <strong>Redes Neuronales</strong>. Implementación de Deep Learning basada en TensorFlow, Keras y Streamlit sobre el benchmark Fashion-MNIST.
+      </p>
+      <div style="display: flex; gap: 1.5rem; font-size: 0.8rem; font-family: var(--font-mono); margin: 0.5rem 0; flex-wrap: wrap;">
+        <a href="https://rn-fucn.streamlit.app/" target="_blank" style="color: var(--craft-blue); font-weight: 700;">🚀 Streamlit App</a>
+        <a href="https://colab.research.google.com/github/feibertciin/RN/blob/main/CNN-tutor.ipynb" target="_blank" style="color: #d97706; font-weight: 700;">⚡ Colab: CNN-tutor.ipynb</a>
+        <a href="https://github.com/feibertciin/RN.git" target="_blank" style="color: var(--text-title); font-weight: 700;">🐙 GitHub Repo</a>
+        <a href="javascript:void(0)" id="footer-btn-doc" style="color: var(--text-title); text-decoration: underline;">📖 Documentación Modular</a>
+      </div>
+      <div class="footer-copy">
+        Dataset Fashion-MNIST &copy; Zalando Research &bull; Licencia MIT &bull; Repositorio: github.com/feibertciin/RN &bull; Todos los derechos reservados
+      </div>
+    </div>
+  </footer>
+
+  <!-- Technical Documentation Modal Window (Ventana Emergente Ajustable y Minimizable) -->
+  <div id="doc-modal" class="doc-modal-overlay">
+    <div class="doc-window" id="doc-window">
+      <!-- Window Title Bar with Controls -->
+      <div class="doc-window-header" id="doc-window-header">
+        <div class="doc-window-title">
+          <img src="assets/images/robot-math.png" alt="Robot Doc" class="doc-window-icon">
+          <span class="doc-title-text" id="doc-title-text">FashionVision AI // Terminal de Documentación Técnica v2.1</span>
+          <span class="doc-window-status">ONLINE · 8 MÓDULOS</span>
+        </div>
+        <div class="doc-window-controls">
+          <!-- Minimize -->
+          <button class="win-btn win-minimize" id="doc-win-minimize" title="Minimizar a barra inferior" aria-label="Minimizar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <!-- Maximize / Restore -->
+          <button class="win-btn win-maximize" id="doc-win-maximize" title="Maximizar / Restaurar marco" aria-label="Maximizar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          </button>
+          <!-- Close / Volver -->
+          <button class="win-btn win-close" id="doc-win-close" title="Cerrar y Volver a la página" aria-label="Cerrar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Window Body: Sidebar + Content -->
+      <div class="doc-window-body">
+        <!-- Sidebar Navigation -->
+        <aside class="doc-sidebar">
+          <div class="doc-sidebar-header">MÓDULOS TÉCNICOS</div>
+          <nav class="doc-nav-list" id="doc-nav-list">
+            <button class="doc-nav-item active" data-mod="mod1">01. Marco Teórico &amp; Planteamiento</button>
+            <button class="doc-nav-item" data-mod="mod2">02. Dataset &amp; Exploración EDA</button>
+            <button class="doc-nav-item" data-mod="mod3">03. Arquitectura CNN (422k params)</button>
+            <button class="doc-nav-item" data-mod="mod4">04. Entrenamiento &amp; Métricas (90.15%)</button>
+            <button class="doc-nav-item" data-mod="mod5">05. Motor de Similitud Vectorial</button>
+            <button class="doc-nav-item" data-mod="mod6">06. Pipeline de Inferencia Adaptativa</button>
+            <button class="doc-nav-item" data-mod="mod7">07. Despliegue en Streamlit Cloud</button>
+            <button class="doc-nav-item" data-mod="mod8">08. Repositorio Oficial &amp; Código</button>
+          </nav>
+          <div class="doc-sidebar-footer">
+            <a href="https://rn-fucn.streamlit.app/" target="_blank" class="doc-action-btn primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              Abrir Streamlit App
+            </a>
+            <a href="https://colab.research.google.com/github/feibertciin/RN/blob/main/CNN-tutor.ipynb" target="_blank" class="doc-action-btn secondary" style="border-color: rgba(245, 158, 11, 0.4); color: #d97706;">
+              <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Colab" style="height: 14px;">
+              Colab CNN-tutor
+            </a>
+            <a href="https://github.com/feibertciin/RN.git" target="_blank" class="doc-action-btn secondary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub feibertciin/RN
+            </a>
+          </div>
+        </aside>
+
+        <!-- Main Content Reader -->
+        <main class="doc-content-reader" id="doc-content-reader">
+          <!-- Populated dynamically by JavaScript -->
+        </main>
+      </div>
+
+      <!-- Window Footer Bar -->
+      <div class="doc-window-footer">
+        <span class="doc-status-msg" id="doc-status-msg">Modo Lectura Técnica // FashionVision AI &bull; TensorFlow 2.15</span>
+        <button class="doc-btn-back" id="doc-btn-back">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span id="doc-back-label">Volver a la Página Principal</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimized Floating Dock Pill (When Minimized) -->
+  <div id="doc-dock-pill" class="doc-dock-pill" style="display: none;">
+    <img src="assets/images/robot-math.png" alt="Doc Dock" class="dock-robot-icon">
+    <span>Documentación Técnica (Minimizada)</span>
+    <button id="doc-dock-restore" class="dock-restore-btn" title="Restaurar ventana" aria-label="Restaurar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </button>
+    <button id="doc-dock-close" class="dock-close-btn" title="Cerrar ventana" aria-label="Cerrar">✕</button>
+  </div>
+
+  <!-- Local Script -->
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
